@@ -13,7 +13,7 @@
                             <div class="card shadow">
                                 <div class="card-body">
                                     <h6>Total</h6>
-                                    <p class="text-center">10</p>
+                                    <p class="text-center">{{total_todo}}</p>
                                 </div>
                             </div>
                         </div>
@@ -21,7 +21,7 @@
                             <div class="card shadow">
                                 <div class="card-body">
                                     <h6>Completed</h6>
-                                    <p class="text-center">5</p>
+                                    <p class="text-center">{{ completed_todo }}</p>
                                 </div>
                             </div>
                         </div>
@@ -29,7 +29,7 @@
                             <div class="card shadow">
                                 <div class="card-body">
                                     <h6>Uncompleted</h6>
-                                    <p class="text-center">5</p>
+                                    <p class="text-center">{{ uncompleted_todo }}</p>
                                 </div>
                             </div>
                         </div>
@@ -41,7 +41,7 @@
             <div class="card shadow">
                 <div class="card-header">ToDo Form</div>
                 <div class="card-body">
-                    <form action="">
+                    <form action="/add" method="POST">
                         <label for="">Title</label>
                         <input class="form-control" type="text" name="title" placeholder="Add todo...."/>
 
@@ -51,30 +51,23 @@
             </div>
         </div>
     </div> 
+
+    {% if total_todo == 0 %}
+    <marquee class="mt-3 display-6" behavior="" direction="">No ToDo in Database.... Create new ToDo in ToDo form</marquee>
+    {% endif %} <br />
+    {% for todo in todo_list %}
     <div class="border-start border-5 mt-3 shadow">
         <div class="card-body">
-            <h5>1 | Learn Python</h5>
-            <span class="badge bg-success">Complete</span>
-            <a class="btn btn-info btn-sm" href="">Update</a>
-            <a class="btn btn-danger btn-sm" href="">Delete</a>
+            <h5>{{ todo.id }} | {{ todo.title }}</h5>
+            {% if todo.complete %}
+            <span class="badge bg-success">Completed</span>
+            {% else %}
+            <span class="badge bg-secondary">Uncompleted</span>
+            {% endif %}
+            <a class="btn btn-info btn-sm" href="/update/{{ todo.id }}">Update</a>
+            <a class="btn btn-danger btn-sm" href="/delete/{{ todo.id }}">Delete</a>
         </div>
     </div>
-    <div class="border-start border-5 mt-3 shadow">
-        <div class="card-body">
-            <h5>1 | Learn Python</h5>
-            <span class="badge bg-success">Complete</span>
-            <a class="btn btn-info btn-sm" href="">Update</a>
-            <a class="btn btn-danger btn-sm" href="">Delete</a>
-        </div>
-    </div>
-    <div class="border-start border-5 mt-3 shadow">
-        <div class="card-body">
-            <h5>1 | Learn Python</h5>
-            <span class="badge bg-success">Complete</span>
-            <a class="btn btn-info btn-sm" href="">Update</a>
-            <a class="btn btn-danger btn-sm" href="">Delete</a>
-        </div>
-    </div>
-    
+    {% endfor %}       
 </div>
 {% endblock %}
