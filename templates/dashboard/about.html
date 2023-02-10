@@ -1,5 +1,46 @@
 {% extends 'partials/base.html' %} <br />
 {% block title %} About {% endblock %} <br />
-{% block content %}
-<h1> About Page</h1>
+
+{% block content %} 
+<head>
+<style>
+h3 {
+    color: black;
+  font-family: verdana;
+  font-size: 250%;
+}
+
+.center {
+  color: rgb(34, 0, 255);
+  font-family: courier;
+  margin: auto;
+  font-size: 350%;
+  width: 100%;
+  border: 3px solid rgb(128, 47, 0);
+  padding: 20px;
+  margin: 70px;
+}
+
+.parent {
+    color: rgb(255, 0, 34);
+    height: 1000px;
+    width: 1500px;
+    font-size: 350%;
+    text-align: center;
+}
+</style>
+</head>
+<body>
+    <h3>About:</h3>
+    
+        <div class="center">
+        <marquee behavior="" direction="">Hai! This website is created by Vinod.</marquee>
+    </div>
+
+    <div class="parent">
+        <span class="child">Thank you!</span>
+    </div>
+    
+</body>
+
 {% endblock %}
