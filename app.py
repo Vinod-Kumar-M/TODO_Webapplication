@@ -19,6 +19,8 @@ class Todo(db.Model):
 
 @app.route('/')
 def index():
+    print(request.args.get('q'))
+    # if
     todo_list = Todo.query.all()
     total_todo = Todo.query.count()
     completed_todo = Todo.query.filter_by(complete=True).count()
@@ -52,6 +54,21 @@ def update(id):
 @app.route('/about')
 def about():
     return render_template('dashboard/about.html')
+
+@app.route('/search')
+def search(title):    
+    q = request.args.get("q")
+
+    if q:
+        todo = Todo.query.filter(Todo.title.contains(q) |
+        Todo.id.contains(q))
+    else:
+        todo = Todo.query.all()
+    return render_template('dashboard/search.html',q=q)
+
+    # # q="%{}%".format(q)
+    # # todo = Todo.query.filter(todo.title.like(q)).all()
+    # return redirect(url_for('index'))
 
 if __name__ == "__main__":
     app.run(debug=True)
